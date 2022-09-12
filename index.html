@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="estilos.css">
+	<link rel="stylesheet" href="fonts.css">
+	<link href="https://fonts.googleapis.com/css2?family=Monoton&display=swap" rel="stylesheet">
+    <title>Traductor Yoreme</title>
+</head>
+
+<body>
+	
+	<header>
+		<div class="menu_bar">
+			<a href="#" class="bt-menu"><span class="icon-menu"></span>Menu</a>
+		</div>
+
+		<nav>
+			<ul>
+				<li><a href="#"><span class="icon-home"></span>INICIO</a></li>
+				<li><a href="paginas/registrar-palabras.html"><span class="icon-file-text2"></span>Registrar Palabras</a></li>
+				<li><a href="paginas/palabras-registradas.html"><span class="icon-address-book"></span>Palabras registradas</a></li>
+				<li><a href="paginas/clases-grabadas.html"><span class="icon-film"></span>CLASES GRABADAS</a></li>
+				
+			</ul>
+		</nav>
+	</header>
+
+    
+    <h2 id="titulo"class="d-flex justify-content-center text-danger">Traductor Yorem </h2>
+	
+    <div class="container">
+
+        
+		
+		<div class="row md-12">
+			<div class="col">
+			
+				
+               
+			  
+				
+				
+		
+                <form id="formulario" method="POST" action="traducir.php">
+                    <div class="form-group row">
+                        <label for="txto" class="col-sm-2 col-form-label" class="text-center"><b>Palabra :</b> </label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="txto" name="txto" placeholder="Ingrese palabra">
+                        </div>
+                    </div><br><br>
+                    <div class="form-group row">
+                        <label for="cboi" class="col-sm-2 col-form-label" class="text-center"><b>Idioma :</b></label>
+                        <div class="col-sm-10">
+                            <select class="custom-select" name="cboi">
+                                <option value="1">Español --> Yoreme </option>
+                                <option value="2">Yoreme --> Español </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div id="box-btn"class="form-group row">
+                        <div id="box-btn" class="col text-center">
+                            <button type="submit" class="btn btn-primary btn-lg">Traducir</button>
+                        </div>
+                    </div><br><br>
+
+                    <div class="form-group row" id="mostrar">       <!--style="display:none;"-->
+                        <label name="traduccion" id="traduccion" class="col-sm-10 col-form-label"></label>
+                    </div>
+                </form>
+				
+				
+            </div>
+        </div>
+		
+	</div>
+			
+	
+    
+	
+	
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            var form = $("#formulario");
+            var cadena = "";
+            form.submit(function () {
+                $.ajax({
+                    url: "traducir.php",
+                    method: "POST",
+                    data: form.serialize(),
+                    success: function (r) {
+                        cadena = "La Traduccion es : " + r;
+                        $("#mostrar").show();
+                        $("#traduccion").text(cadena);
+                    },
+                    dataType: "html",
+                });
+                return false;
+            })
+        })
+    </script>
+	<script src="http://code.jquery.com/jquery-latest.js"></script></script>
+	<script src="menu.js"></script>
+					
+</body>
+
+</html>
